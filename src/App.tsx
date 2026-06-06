@@ -8,10 +8,10 @@ function App() {
   const [darkMode, setDarkMode] = useState(true);
 
   return (
-    <div className={darkMode ? 'dark' : 'light'}>
+    <div className={`${darkMode ? 'dark' : 'light'} min-h-screen flex flex-col`}>
       <Router>
         <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
-        <main className={`flex-1 ${darkMode ? 'bg-slate-950' : 'bg-white'}`}>
+        <main className={`flex-grow flex flex-col ${darkMode ? 'bg-slate-950' : 'bg-slate-900'}`}>
           <Routes>
             <Route path="/" element={<Home darkMode={darkMode} />} />
             <Route path="/learn" element={<Learn darkMode={darkMode} />} />
@@ -20,9 +20,9 @@ function App() {
         </main>
         
         {/* Footer */}
-        <footer className={`py-8 px-4 border-t ${darkMode ? 'bg-slate-900 border-slate-800 text-gray-400' : 'bg-gray-50 border-gray-200 text-gray-600'}`}>
-          <div className="max-w-6xl mx-auto text-center text-sm">
-            <p>RequestFlow © 2024 | Visualize how the internet works</p>
+        <footer className={`py-6 px-4 border-t ${darkMode ? 'bg-slate-900 border-slate-800 text-gray-500' : 'bg-gray-100 border-gray-250 text-gray-600'} text-center text-xs font-mono`}>
+          <div className="max-w-6xl mx-auto">
+            <p>RequestFlow © 2026 | Visualize how the internet works end-to-end</p>
           </div>
         </footer>
       </Router>
