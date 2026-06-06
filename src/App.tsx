@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Navbar } from './components';
-import { Home, Learn, About } from './pages';
+import { Home, Learn, About, SystemDesign } from './pages';
 import './style-new.css';
 
 function App() {
@@ -15,6 +15,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home darkMode={darkMode} />} />
             <Route path="/learn" element={<Learn darkMode={darkMode} />} />
+            <Route path="/system-design" element={<SystemDesign />} />
             <Route path="/about" element={<About darkMode={darkMode} />} />
           </Routes>
         </main>

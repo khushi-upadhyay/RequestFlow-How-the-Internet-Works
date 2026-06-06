@@ -31,6 +31,9 @@ export const Navbar: React.FC<NavbarProps> = ({ darkMode, setDarkMode }) => {
             <Link to="/learn" className={`${darkMode ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-gray-900'}`}>
               Learn
             </Link>
+            <Link to="/system-design" className={`${darkMode ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-gray-900'}`}>
+              System Design
+            </Link>
             <Link to="/about" className={`${darkMode ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-gray-900'}`}>
               About
             </Link>
@@ -67,6 +70,7 @@ export const Navbar: React.FC<NavbarProps> = ({ darkMode, setDarkMode }) => {
           <div className={`md:hidden pb-4 space-y-2 ${darkMode ? 'bg-slate-800' : 'bg-gray-50'}`}>
             <Link to="/" className="block px-4 py-2 rounded">Home</Link>
             <Link to="/learn" className="block px-4 py-2 rounded">Learn</Link>
+            <Link to="/system-design" className="block px-4 py-2 rounded">System Design</Link>
             <Link to="/about" className="block px-4 py-2 rounded">About</Link>
           </div>
         )}

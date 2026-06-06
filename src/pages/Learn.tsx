@@ -619,24 +619,20 @@ export const Learn: React.FC<LearnProps> = ({ darkMode }) => {
   }, 0);
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white">
+    <div className="min-h-screen bg-slate-950 text-slate-200 flex flex-col w-full">
       {/* Hero */}
-      <section className="py-16 px-4 bg-gradient-to-b from-slate-900 to-slate-950 border-b border-slate-900">
-        <div className="max-w-5xl mx-auto text-center">
-          <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 text-xs font-semibold mb-6">
-              <Wifi size={12} /> Visual Learning Mode
-            </div>
-            <h1 className="text-4xl md:text-5xl font-extrabold mb-4 bg-gradient-to-r from-blue-400 via-cyan-400 to-indigo-400 bg-clip-text text-transparent">
+      <section className="w-full py-20 px-6 md:px-12 lg:px-24 xl:px-32 bg-gradient-to-b from-slate-900 to-slate-950 border-b border-slate-800/50 flex flex-col items-center">
+        <div className="w-full text-center flex flex-col items-center">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="w-full">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 text-white tracking-tight">
               How the Internet Works
             </h1>
-            <p className="text-gray-400 text-lg max-w-2xl mx-auto mb-8">
-              8 steps. Visual diagrams. Real examples. Understand what happens in the
-              <span className="text-cyan-400 font-semibold"> ~350ms</span> between typing a URL and seeing a page.
+            <p className="text-slate-400 text-lg md:text-xl lg:text-2xl w-full mx-auto mb-10">
+              The <span className="text-blue-400 font-semibold">~350ms</span> journey from typing a URL to seeing a page.
             </p>
 
             {/* Latency timeline bar */}
-            <div className="max-w-3xl mx-auto">
+            <div className="w-full mx-auto">
               <div className="flex items-center gap-1 mb-2">
                 {STEPS.map(s => (
                   <button
@@ -646,14 +642,14 @@ export const Learn: React.FC<LearnProps> = ({ darkMode }) => {
                     title={s.title}
                   >
                     <div
-                      className="h-3 rounded-sm transition-all duration-200 group-hover:opacity-90 group-hover:scale-y-125"
+                      className="h-3 md:h-4 rounded-md transition-all duration-200 group-hover:opacity-100 opacity-80 group-hover:scale-y-110"
                       style={{ backgroundColor: s.color }}
                     />
-                    <div className="text-[8px] text-gray-500 mt-0.5 text-center truncate">{s.emoji}</div>
+                    <div className="text-[10px] md:text-xs text-slate-500 mt-1.5 text-center truncate font-medium">{s.emoji}</div>
                   </button>
                 ))}
               </div>
-              <div className="flex justify-between text-[10px] text-gray-600 font-mono">
+              <div className="flex justify-between text-xs md:text-sm text-slate-500 font-mono mt-2">
                 <span>0ms</span>
                 <span>Total: ~{Math.round(totalLatency)}ms</span>
               </div>
@@ -663,7 +659,7 @@ export const Learn: React.FC<LearnProps> = ({ darkMode }) => {
       </section>
 
       {/* Steps */}
-      <section className="max-w-5xl mx-auto px-4 py-12 space-y-6">
+      <section className="w-full px-6 md:px-12 lg:px-24 xl:px-32 py-16 flex flex-col gap-6">
         {STEPS.map((step, idx) => {
           const Icon = step.icon;
           const isOpen = activeStep === step.id;
@@ -740,7 +736,9 @@ export const Learn: React.FC<LearnProps> = ({ darkMode }) => {
                       </div>
 
                       {/* Live Diagram */}
-                      {step.diagram}
+                      <div className="overflow-x-auto">
+                        {step.diagram}
+                      </div>
 
                       {/* Key Facts + Interview Tips */}
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -784,10 +782,10 @@ export const Learn: React.FC<LearnProps> = ({ darkMode }) => {
       </section>
 
       {/* Full timeline summary */}
-      <section className="max-w-5xl mx-auto px-4 py-12 border-t border-slate-900">
-        <h2 className="text-2xl font-bold text-center mb-2">Complete Request Timeline</h2>
-        <p className="text-center text-gray-400 text-sm mb-8">A full web request completes in under 400ms. Here's where the time goes:</p>
-        <div className="space-y-3">
+      <section className="w-full px-6 md:px-12 lg:px-24 xl:px-32 py-16 border-t border-slate-800/50">
+        <h2 className="text-2xl font-bold text-center mb-2 text-white">Complete Request Timeline</h2>
+        <p className="text-center text-slate-400 text-sm mb-10">A full web request completes in under 400ms. Here's where the time goes:</p>
+        <div className="w-full flex flex-col gap-4">
           {STEPS.map((s, i) => {
             const latencyNum = parseFloat(s.latency) || 20;
             const pct = (latencyNum / totalLatency) * 100;

@@ -29,7 +29,7 @@ export const Home: React.FC<HomeProps> = ({ darkMode }) => {
   const activeStepIndex = requestFlowSteps.findIndex(s => s.id === sim.currentStepId);
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white">
+    <div className="min-h-screen bg-slate-950 text-white flex flex-col w-full">
 
       {/* ── Hero Header ───────────────────────────────────── */}
       <section className="py-12 px-4 bg-gradient-to-b from-slate-900 via-slate-950 to-slate-950 border-b border-slate-900/60">
@@ -138,6 +138,7 @@ export const Home: React.FC<HomeProps> = ({ darkMode }) => {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
+              className="overflow-x-auto"
             >
               <DatadogTopology
                 activeTrail={sim.activeTrail}
@@ -151,7 +152,7 @@ export const Home: React.FC<HomeProps> = ({ darkMode }) => {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="flex-1"
+              className="flex-1 overflow-x-auto"
             >
               <WiresharkPane
                 packets={sim.visiblePackets}
