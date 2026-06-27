@@ -1,44 +1,57 @@
 @import "tailwindcss";
 
 @theme {
-  --color-background: #0A0F1C;
-  --color-surface: #111827;
-  --color-border: #1F2937;
-  --color-primary: #3B82F6;
-  --color-secondary: #8B5CF6;
-  --color-success: #22C55E;
-  --color-warning: #F59E0B;
-  --color-text: #F8FAFC;
-  --color-muted: #94A3B8;
+  --color-background: #09090b;
+  --color-surface: #111113;
+  --color-surface-2: #18181b;
+  --color-border: #2b2b30;
+  --color-primary: #3b82f6;
+  --color-success: #22c55e;
+  --color-warning: #f59e0b;
+  --color-danger: #ef4444;
+  --color-text: #fafafa;
+  --color-muted: #71717a;
+  --color-muted-bright: #a1a1aa;
 
-  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
-* {
-  margin: 0;
-  padding: 0;
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
 html,
+body,
+#root {
+  min-height: 100%;
+}
+
 body {
-  height: 100%;
-  background-color: var(--color-background);
+  margin: 0;
+  background: var(--color-background);
   color: var(--color-text);
+  font-family: var(--font-sans);
 }
 
 #root {
-  display: flex;
-  flex-direction: column;
   min-height: 100vh;
 }
 
-/* Smooth scrolling */
-html {
-  scroll-behavior: smooth;
+::selection {
+  background: rgba(59, 130, 246, 0.25);
+  color: #fff;
 }
 
-/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -49,17 +62,139 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-border);
-  border-radius: 4px;
+  background: #2b2b30;
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-muted);
+  background: #3f3f46;
+  border: 2px solid transparent;
+  background-clip: content-box;
 }
 
-/* Selection styles */
-::selection {
-  background-color: rgba(59, 130, 246, 0.3);
-  color: inherit;
+:focus-visible {
+  outline: 2px solid rgba(59, 130, 246, 0.9);
+  outline-offset: 2px;
 }
 
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  border-radius: 999px;
+  outline: none;
+  cursor: pointer;
+  background: #2b2b30;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fafafa;
+  border: 2px solid #3b82f6;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #3b82f6;
+  border-radius: 50%;
+  background: #fafafa;
+}
+
+.ui-card {
+  background: #18181b;
+  border: 1px solid #2b2b30;
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.18);
+}
+
+.ui-card-hover {
+  transition: transform 160ms ease, border-color 160ms ease, background-color 160ms ease;
+}
+
+.ui-card-hover:hover {
+  transform: translateY(-1px);
+  background: #232326;
+  border-color: #3a3a40;
+}
+
+.ui-button-primary {
+  background: #3b82f6;
+  color: #fff;
+  border: 1px solid #3b82f6;
+  border-radius: 10px;
+}
+
+.ui-button-primary:hover {
+  background: #2563eb;
+  border-color: #2563eb;
+}
+
+.ui-button-secondary {
+  background: transparent;
+  color: #fafafa;
+  border: 1px solid #2b2b30;
+  border-radius: 10px;
+}
+
+.ui-button-secondary:hover {
+  background: #232326;
+  border-color: #3a3a40;
+}
+
+.ui-button-ghost {
+  background: transparent;
+  color: #a1a1aa;
+  border: 1px solid transparent;
+  border-radius: 10px;
+}
+
+.ui-button-ghost:hover {
+  background: rgba(255, 255, 255, 0.04);
+  color: #fafafa;
+}
+
+.page-title {
+  font-size: clamp(2.25rem, 4vw, 4rem);
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  font-weight: 800;
+  color: #fafafa;
+}
+
+.section-title {
+  font-size: 1.125rem;
+  line-height: 1.4;
+  font-weight: 700;
+  color: #fafafa;
+}
+
+.section-lead {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: #a1a1aa;
+}
+
+.muted-label {
+  font-size: 0.6875rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #71717a;
+  font-weight: 700;
+}
+
+.surface-divider {
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+.surface-soft {
+  background: rgba(255, 255, 255, 0.02);
+}

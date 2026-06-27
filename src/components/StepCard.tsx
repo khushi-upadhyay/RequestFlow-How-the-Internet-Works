@@ -11,65 +11,52 @@ interface StepCardProps {
   index: number;
 }
 
-export const StepCard: React.FC<StepCardProps> = ({ 
-  step, 
-  isActive, 
-  onClick, 
-  darkMode,
-  index 
-}) => {
+export const StepCard: React.FC<StepCardProps> = ({ step, isActive, onClick, index }) => {
   const IconComponent = (Icons as any)[step.icon] || Icons.Zap;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
+    <motion.button
+      type="button"
+      initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.05 }}
+      transition={{ delay: index * 0.04, duration: 0.25 }}
+      whileHover={{ y: -1, scale: 1.02 }}
       onClick={onClick}
-      className={`cursor-pointer group relative p-4 rounded-xl transition-all duration-300 ${
+      className={`group relative rounded-xl border p-4 text-left transition-all duration-200 ${
         isActive
-          ? darkMode
-            ? 'bg-gradient-to-br from-blue-600 to-cyan-600 shadow-lg shadow-blue-500/50 text-white'
-            : 'bg-gradient-to-br from-blue-500 to-cyan-500 shadow-lg shadow-blue-500/30 text-white'
-          : darkMode
-          ? 'bg-slate-800 hover:bg-slate-700 border border-slate-700 text-gray-300'
-          : 'bg-white hover:bg-gray-50 border border-gray-200 text-gray-600'
+          ? 'border-blue-500 bg-[#232326] shadow-sm'
+          : 'border-[#2b2b30] bg-[#18181b] hover:border-[#3a3a40] hover:bg-[#232326]'
       }`}
     >
-      <div className="flex items-start justify-between mb-2">
-        <div className="flex items-center gap-3">
-          <div className={`p-2 rounded-lg ${isActive ? 'bg-white/20' : darkMode ? 'bg-slate-700' : 'bg-gray-100'}`}>
-            <IconComponent size={20} />
-          </div>
-          <div>
-            <h3 className="font-semibold text-sm">{step.name}</h3>
-            <p className={`text-xs ${isActive ? 'opacity-90' : ''}`}>{step.latency}ms</p>
-          </div>
-        </div>
-        <span className={`text-xs font-bold px-2 py-1 rounded ${
-          isActive 
-            ? 'bg-white/20 text-white' 
-            : darkMode 
-            ? 'bg-slate-700 text-gray-300' 
-            : 'bg-gray-100 text-gray-600'
-        }`}>
-          {index + 1}
-        </span>
-      </div>
-      <p className={`text-xs ${isActive ? 'opacity-90' : ''}`}>{step.description}</p>
+      <span
+        className={`absolute right-3 top-3 flex h-5 w-5 items-center justify-center rounded-md font-mono text-[10px] font-bold ${
+          isActive ? 'bg-blue-500/15 text-blue-400' : 'bg-white/5 text-[#71717a]'
+        }`}
+      >
+        {index + 1}
+      </span>
 
-      {/* Category badge */}
-      <div className="mt-3 flex gap-1">
-        <span className={`text-xs px-2 py-1 rounded ${
-          isActive
-            ? 'bg-white/20 text-white'
-            : darkMode
-            ? 'bg-slate-700/50 text-gray-400'
-            : 'bg-gray-100 text-gray-500'
-        }`}>
+      <div
+        className={`mb-3 flex h-9 w-9 items-center justify-center rounded-lg border ${
+          isActive ? 'border-blue-500/30 bg-blue-500/10 text-blue-400' : 'border-[#2b2b30] bg-[#111113] text-[#a1a1aa]'
+        }`}
+      >
+        <IconComponent size={16} strokeWidth={2} />
+      </div>
+
+      <h3 className={`mb-1 text-sm font-semibold ${isActive ? 'text-[#fafafa]' : 'text-[#e4e4e7]'}`}>
+        {step.name}
+      </h3>
+      <p className="mb-2 font-mono text-[10px] text-[#71717a]">{step.latency}ms</p>
+      <p className="line-clamp-2 text-[11px] leading-relaxed text-[#a1a1aa]">
+        {step.description}
+      </p>
+
+      <div className="mt-3">
+        <span className="inline-flex rounded-full border border-[#2b2b30] bg-[#111113] px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-[#a1a1aa]">
           {step.category}
         </span>
       </div>
-    </motion.div>
+    </motion.button>
   );
 };

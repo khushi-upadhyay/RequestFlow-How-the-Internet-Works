@@ -17,10 +17,8 @@ export const FlowAnimation: React.FC<FlowAnimationProps> = ({
   darkMode,
 }) => {
   return (
-    <div className={`w-full overflow-x-auto py-8 px-4 rounded-lg ${
-      darkMode ? 'bg-slate-900' : 'bg-gray-50'
-    }`}>
-      <div className="flex items-center gap-4 min-w-min px-4">
+    <div className={`w-full overflow-x-auto rounded-xl border px-4 py-7 ${darkMode ? 'border-[#2b2b30] bg-[#18181b]' : 'border-gray-200 bg-white'}`}>
+      <div className="flex min-w-min items-center gap-4 px-4">
         {requestFlowSteps.map((step, index) => {
           const IconComponent = (Icons as any)[step.icon] || Icons.Zap;
           const isActive = index === currentStep;
@@ -28,59 +26,31 @@ export const FlowAnimation: React.FC<FlowAnimationProps> = ({
 
           return (
             <React.Fragment key={step.id}>
-              {/* Step Node */}
-              <motion.div
+              <motion.button
+                type="button"
                 onClick={() => onStepClick(index)}
-                animate={{
-                  scale: isActive ? 1.1 : 1,
-                }}
+                animate={{ scale: isActive ? 1.02 : 1 }}
                 transition={{ type: 'spring', damping: 15, stiffness: 200 }}
-                className="cursor-pointer relative"
+                className="relative cursor-pointer"
               >
-                <motion.div
-                  animate={{
-                    boxShadow: isActive
-                      ? [
-                          `0 0 0 4px rgba(59, 130, 246, 0)`,
-                          `0 0 20px 4px rgba(59, 130, 246, 0.5)`,
-                          `0 0 0 4px rgba(59, 130, 246, 0)`,
-                        ]
-                      : 'none',
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: isActive && isAnimating ? Infinity : 0,
-                  }}
-                  className={`w-14 h-14 rounded-full flex items-center justify-center font-bold text-white transition-colors relative ${
+                <div
+                  className={`flex h-14 w-14 items-center justify-center rounded-full border text-white transition-colors ${
                     isActive
-                      ? 'bg-gradient-to-br from-blue-500 to-cyan-500'
+                      ? 'border-blue-500 bg-blue-500'
                       : isPassed
-                      ? 'bg-green-500'
+                      ? 'border-green-500 bg-green-500'
                       : darkMode
-                      ? 'bg-slate-700'
-                      : 'bg-gray-300'
+                      ? 'border-[#2b2b30] bg-[#111113] text-[#a1a1aa]'
+                      : 'border-gray-300 bg-white text-gray-500'
                   }`}
                 >
-                  {isPassed ? (
-                    <span className="text-lg">✓</span>
-                  ) : (
-                    <IconComponent size={24} />
-                  )}
-                </motion.div>
-
-                {/* Label */}
-                <div className={`text-center mt-2 text-xs font-semibold ${
-                  isActive
-                    ? 'text-blue-500'
-                    : darkMode
-                    ? 'text-gray-300'
-                    : 'text-gray-600'
-                }`}>
+                  {isPassed ? <span className="text-lg">✓</span> : <IconComponent size={24} />}
+                </div>
+                <div className={`mt-2 text-center text-xs font-semibold ${isActive ? 'text-blue-500' : darkMode ? 'text-[#a1a1aa]' : 'text-gray-600'}`}>
                   {step.latency}ms
                 </div>
-              </motion.div>
+              </motion.button>
 
-              {/* Arrow between steps */}
               {index < requestFlowSteps.length - 1 && (
                 <motion.div
                   animate={{
@@ -91,13 +61,7 @@ export const FlowAnimation: React.FC<FlowAnimationProps> = ({
                     duration: 0.6,
                     repeat: isAnimating && index === currentStep ? Infinity : 0,
                   }}
-                  className={`w-8 h-1 rounded ${
-                    index < currentStep
-                      ? 'bg-green-500'
-                      : darkMode
-                      ? 'bg-slate-600'
-                      : 'bg-gray-300'
-                  }`}
+                  className={`h-1 w-8 rounded-full ${index < currentStep ? 'bg-blue-500' : darkMode ? 'bg-[#2b2b30]' : 'bg-gray-300'}`}
                 />
               )}
             </React.Fragment>
