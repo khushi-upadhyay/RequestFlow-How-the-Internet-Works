@@ -8,4 +8,5 @@ export { ProgressTracker } from './ProgressTracker';
 export { DatadogTopology } from './DatadogTopology';
 export { LiveMetrics } from './LiveMetrics';
 export { WiresharkPane } from './WiresharkPane';
+export { PageShell } from './PageShell';
 
